@@ -1,27 +1,35 @@
-import {nomes} from "./data/vetor-obj-nomes.mjs";
+import {objNomes} from "./data/vetor-obj-nomes.mjs";
 
-function buscaBinaria(vetor, valorBusca){
+function buscaBinaria(vetor, fnComp){
     let ini = 0;
     let fim = vetor.length - 1;
-
+    
     while(fim >= ini){
         let meio = Math.floor((ini+fim)/2);
-
-        if(valorBusca === vetor[meio]){
-            return meio;
-        }else if(valorBusca > vetor[meio]){
-            ini = meio + 1;
-        }else{
-            fim = meio - 1;
+        
+        switch(fnComp(vetor[meio])){
+            case 0:
+                return meio;
+            case 1:
+                ini = meio + 1;
+                break;
+            default:
+                fim = meio - 1;
         }
     }
     return -1;
 }
 
 
-function comparaNome(obj){
-    switch(obj.first_name){
-        case "ALEXANDRE":
-            break;
+function comparar(valorMeio, valorBusca = 'alexandre'){
+    valorBusca = valorBusca.replace(" ", "").toUpperCase();
+    if(valorBusca === valorMeio.first_name){
+        return 0;
+    }else if (valorBusca > valorMeio.first_name){
+        return 1;
+    }else {
+        return -1;
     }
 }
+
+console.log(buscaBinaria(objNomes, comparar));
