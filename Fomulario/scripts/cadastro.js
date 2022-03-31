@@ -1,4 +1,6 @@
-const divMessage = document.querySelector(".alert");
+
+
+
 var alunos = []
 var totalAlunos = 0;
 function cadastro() {
@@ -34,7 +36,29 @@ function cadastro() {
             }
             inserirAluno(aluno);
 
+        } else {
+            ativar("Verifique os valores e tente novamente.", "error");
         }
+    } else {
+        ativar("Verifique os valores e tente novamente.", "error");
+    }
+}
+
+function resetarCampos() {
+    document.getElementById('nome').value = "";
+    document.getElementById('ra').value = "";
+    document.getElementById('idade').value = "";
+    document.getElementById('media').value = "";
+
+    let sexoRadios = document.getElementsByName('sexo');
+    let resRadios = document.getElementsByName('resultado');
+
+    for (let r of resRadios) {
+        r.checked = false;
+    }
+
+    for (let s of sexoRadios) {
+        s.checked = false;
     }
 }
 
@@ -53,14 +77,16 @@ function getVetorAlunos() {
     return alunos;
 }
 
+
 function inserirAluno(aluno) {
     alunos = getVetorAlunos();
     if (totalAlunos < 50) {
         alunos.push(aluno);
         localStorage.setItem('alunos', JSON.stringify(alunos));
-        alert('Cadastrado com sucesso.')
+        resetarCampos();
+        ativar("CADASTRADO COM SUCESSO", "message");
     } else {
-        alert('Erro ao cadastrar, limite maximo atingido.')
+        ativar("Limite de alunos atingido.", "error");
     }
 }
 
@@ -78,3 +104,16 @@ btnVoltar.addEventListener('click', voltar);
 
 
 
+
+const divMessage = document.querySelector(".alert");
+
+function ativar(msg, classe) {
+    const message = document.createElement("div");
+    message.classList.add(classe);
+    message.innerText = msg;
+    divMessage.appendChild(message);
+
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 3000);
+}

@@ -46,6 +46,17 @@
     background-color: rgba(0, 0, 0, 0.5);
     animation: time 3s forwards;
   }
+
+  .error::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: time 3s forwards;
+  }
   @keyframes time {
     0% {
       width: 0;

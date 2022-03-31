@@ -63,15 +63,11 @@ function loadAluno(aluno) {
 function bubbleSort(vetor, fnComp) {
     let ordenacao = getOrdenacao();
     let tam = vetor.length - 1;
-    let trocas = 0;
 
-    let comparacoes = 0;
     do {
         for (let i = 0; i < tam; i++) {
-            comparacoes++;
             if (fnComp(ordenacao, vetor[i], vetor[i + 1])) {
                 [vetor[i], vetor[i + 1]] = [vetor[i + 1], vetor[i]];
-                trocas++;
             }
         }
         tam--;
