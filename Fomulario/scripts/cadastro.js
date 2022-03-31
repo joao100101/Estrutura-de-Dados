@@ -1,6 +1,6 @@
+const divMessage = document.querySelector(".alert");
 var alunos = []
 var totalAlunos = 0;
-
 function cadastro() {
     let nome = document.getElementById('nome').value;
     let ra = parseInt(document.getElementById('ra').value);
@@ -33,6 +33,7 @@ function cadastro() {
                 RESULTADO: resultado
             }
             inserirAluno(aluno);
+
         }
     }
 }
@@ -54,11 +55,12 @@ function getVetorAlunos() {
 
 function inserirAluno(aluno) {
     alunos = getVetorAlunos();
-    if (totalAlunos < 1) {
+    if (totalAlunos < 50) {
         alunos.push(aluno);
         localStorage.setItem('alunos', JSON.stringify(alunos));
+        alert('Cadastrado com sucesso.')
     } else {
-        ativar("Limite maximo de alunos atingido!")
+        alert('Erro ao cadastrar, limite maximo atingido.')
     }
 }
 
@@ -75,21 +77,4 @@ btnCad.addEventListener('click', cadastro);
 btnVoltar.addEventListener('click', voltar);
 
 
-const btn = document.getElementById('btn_cadastrar')
-const divMessage = document.querySelector(".alert");
 
-
-function ativar(msg) {
-    const message = document.createElement("div");
-    message.classList.add("message");
-    message.innerText = msg;
-    divMessage.appendChild(message);
-
-    setTimeout(() => {
-        message.style.display = "none";
-    }, 3000);
-}
-
-btn.addEventListener("click", () => {
-    ativar("RESETADO COM SUCESSO");
-});
