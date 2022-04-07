@@ -1,3 +1,10 @@
+var isFirefox = typeof InstallTrigger !== "undefined";
+var storage = localStorage;
+
+if (isFirefox) {
+  storage = sessionStorage;
+}
+
 function telaCad(){
     location.href = "cadastro.html";
 }
@@ -26,7 +33,7 @@ btnRel3.addEventListener('click', () => {
 })
 
 btnReset.addEventListener('click', () => {
-    localStorage.removeItem('alunos')
+    storage.removeItem('alunos')
 })
 
 const btn = document.getElementById('reset')

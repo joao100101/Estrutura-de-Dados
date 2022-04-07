@@ -1,4 +1,9 @@
+var isFirefox = typeof InstallTrigger !== 'undefined';
+var storage = localStorage;
 
+if(isFirefox){
+    storage = sessionStorage
+}
 
 
 var alunos = []
@@ -70,8 +75,8 @@ function isValido(valor) {
 }
 
 function getVetorAlunos() {
-    if (localStorage.getItem('alunos') != null && localStorage.getItem('alunos') != []) {
-        alunos = JSON.parse(localStorage.getItem('alunos'));
+    if (storage.getItem('alunos') != null && storage.getItem('alunos') != []) {
+        alunos = JSON.parse(storage.getItem('alunos'));
     }
     totalAlunos = alunos.length;
     return alunos;
@@ -82,7 +87,7 @@ function inserirAluno(aluno) {
     alunos = getVetorAlunos();
     if (totalAlunos < 50) {
         alunos.push(aluno);
-        localStorage.setItem('alunos', JSON.stringify(alunos));
+        storage.setItem('alunos', JSON.stringify(alunos));
         resetarCampos();
         ativar("CADASTRADO COM SUCESSO", "message");
     } else {
