@@ -1,40 +1,40 @@
 function merge(vetor) {
-    if (vetor.length < 2) {
-        return vetor
-    }
-    var meio = Math.floor(vetor.length / 2)
+  if (vetor.length < 2) {
+    return vetor;
+  }
 
-    var esquerda = vetor.slice(0, meio);
-    var direita = vetor.slice(meio);
+  var meio = Math.floor(vetor.length / 2);
 
-    esquerda = merge(esquerda)
-    direita = merge(direita)
+  var esquerda = vetor.slice(0, meio);
+  var direita = vetor.slice(meio);
 
-    let posEsq = 0;
-    let posDir = 0;
-    let vetRes = []
+  esquerda = merge(esquerda);
+  direita = merge(direita);
 
-    while (posEsq < esquerda.length && posDir < direita.length) {
-        if (esquerda[posEsq] < direita[posDir]) {
-            vetRes.push(esquerda[posEsq])
-            posEsq++
-        } else {
-            vetRes.push(direita[posDir])
-            posDir++
-        }
-    }
-    let sobra
+  let posEsq = 0;
+  let posDir = 0;
+  let vetRes = [];
 
-    if (posEsq < posDir) {
-        sobra = esquerda.slice(posEsq)
+  while (posEsq < esquerda.length && posDir < direita.length) {
+    if (esquerda[posEsq] < direita[posDir]) {
+      vetRes.push(esquerda[posEsq]);
+      posEsq++;
     } else {
-        sobra = direita.slice(posDir)
+      vetRes.push(direita[posDir]);
+      posDir++;
     }
-    return [...vetRes, ...sobra]
+  }
+  let sobra;
+
+  if (posEsq < posDir) {
+    sobra = esquerda.slice(posEsq);
+  } else {
+    sobra = direita.slice(posDir);
+  }
+  return [...vetRes, ...sobra];
 }
 
+var vetor = [77, 44, 22, 33, 99, 55, 88, 0, 66, 11];
+var numsOrd = merge(vetor);
 
-var vetor = [77, 44, 22, 33, 99, 55, 88, 0, 66, 11]
-var numsOrd = merge(vetor)
-
-console.log(numsOrd)
+console.log(numsOrd);
